@@ -7,7 +7,6 @@ import DetailFilm from './pages/DetailFilm';
 import NotFound from './pages/NotFound';
 
 function App() {
-
   return (
     <>
       <BrowserRouter>
