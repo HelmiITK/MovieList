@@ -5,6 +5,8 @@ import HalamanHome from './pages/HalamanHome';
 import HasilPencarian from './pages/HasilPencarian';
 import DetailFilm from './pages/DetailFilm';
 import NotFound from './pages/NotFound';
+import Trailer from './pages/Trailer';
+
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
           <Route path='/' element={<HalamanHome />} />
           <Route path='/hasil-pencarian' element={<HasilPencarian />} />
           <Route path='/detail-film' element={<DetailFilm />} />
+          <Route path='/trailer/:movieId' element={<Trailer />} />
+
 
           <Route path='*' element={<NotFound />} />
         </Routes>

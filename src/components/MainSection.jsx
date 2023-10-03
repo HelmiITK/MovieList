@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
+import { Link } from "react-router-dom";
 
-function MainSection({ imageURL, title, overview }) {
-
+function MainSection({ imageURL, title, overview, trailer }) {
     return (
         <>
             <div className="relative">
@@ -16,9 +16,11 @@ function MainSection({ imageURL, title, overview }) {
                     <p className="text-xs mb-4 text-white lg:text-base lg:w-[800px]">
                         {overview}
                     </p>
-                    <button className="text-sm border-1 rounded-2xl px-2 py-0.5 border-2 lg:w-44 border-red-600 bg-red-600 lg:py-2 lg:mt-2 text-white lg:font-bold lg:text-lg lg:px-2 lg:rounded-3xl hover:bg-red-800 hover:border-red-800 ">
-                        WATCH TRAILER
-                    </button>
+                    <Link to={`trailer/${trailer}`}>
+                        <button className="text-sm border-1 rounded-2xl px-2 py-0.5 border-2 lg:w-44 border-red-600 bg-red-600 lg:py-2 lg:mt-2 text-white lg:font-bold lg:text-lg lg:px-2 lg:rounded-3xl hover:bg-red-800 hover:border-red-800 ">
+                            WATCH TRAILER
+                        </button>
+                    </Link>
                 </div>
             </div>
         </>
@@ -30,5 +32,6 @@ export default MainSection;
 MainSection.propTypes = {
     imageURL: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    overview: PropTypes.string.isRequired
+    overview: PropTypes.string.isRequired,
+    trailer: PropTypes.number.isRequired
 }
