@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MainSection from "../components/MainSection";
 import Navbar from "../components/Navbar";
 import PopularMovie from "../components/PopularMovie"
+import Footer from "../components/Footer"
 
 import axios from "axios";
 import "slick-carousel/slick/slick.css"
@@ -49,7 +50,7 @@ function HalamanHome1() {
     }, []);
 
     if (trandingMovies.length === 0) {
-        return <h1>Nungguin yah....</h1>;
+        return <h1>Loading...</h1>;
     }
 
 
@@ -94,6 +95,8 @@ function HalamanHome1() {
             </div>
 
             <PopularMovie />
+            
+            <Footer />
 
         </div >
     )

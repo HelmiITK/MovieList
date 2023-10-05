@@ -2,15 +2,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { FiChevronsRight } from "react-icons/fi";
+import { Link } from "react-router-dom"
+// import DetailFilm from "../pages/DetailFilm";
 
 function PopularMovie() {
 
-    const [trandingMovies, setTrandingMovies] = useState([]);
+    const [popularMovies, setPopularMovies] = useState([]);
     const [showAll, setShowAll] = useState(false);
     // console.log(trandingMovies)
 
     useEffect(() => {
-        const getTrandingMovies = async () => {
+        const getPopularMovies = async () => {
             try {
                 const respons = await axios.get(
                     `${import.meta.env.VITE_API_URL}/movie/popular`,
@@ -30,7 +32,7 @@ function PopularMovie() {
                     }
 
                 }
-                setTrandingMovies(trending);
+                setPopularMovies(trending);
 
             } catch (error) {
                 if (axios.isAxiosError(error)) {
@@ -41,11 +43,11 @@ function PopularMovie() {
             }
         };
 
-        getTrandingMovies();
+        getPopularMovies();
     }, []);
 
-    if (trandingMovies.length === 0) {
-        return <h1>Nungguin yah....</h1>;
+    if (popularMovies.length === 0) {
+        return <h1>Loading...</h1>;
     }
 
     const handleClick = () => {
@@ -57,42 +59,50 @@ function PopularMovie() {
             <div className="w-full bg-black p-8">
                 <div className="flex justify-between mb-10">
                     <header className="text-white lg:text-5xl font font-extrabold hover:text-red-600">Popular Movie</header>
-                    <button
-                        onClick={handleClick}
-                        type="button"
-                        className="flex items-center hover:text-white text-red-600 lg:text-xl gap-2 mr-5 ">
-                        {showAll ? 'See Some Movies' : 'See All Movies'}
-                        <FiChevronsRight className="text-red-600 w-10 h-11 hover:text-white" />
-                    </button>
+                    <div className="group">
+                        <button
+                            onClick={handleClick}
+                            type="button"
+                            className="flex items-center group-hover:text-white text-red-600 lg:text-xl gap-2 mr-5 ">
+                            {showAll ? 'See Some Movies' : 'See All Movies'}
+                            <FiChevronsRight className="text-red-600 w-10 h-11 group-hover:text-white" />
+                        </button>
+                    </div>
                 </div>
                 <div className="grid lg:grid-cols-4 md:grid-cols-2">
                     {showAll ? (
-                        trandingMovies.map((movie) => (
+                        popularMovies.map((movie) => (
                             <div key={movie.id}>
                                 <div className="border-2 border-red-800 hover:border-white p-2 m-4 flex justify-center cursor-pointer">
-                                    <img
-                                        className="flex justify-center items-center content-center opacity-60 hover:opacity-100 "
-                                        src={import.meta.env.VITE_BASEIMGURL + movie.poster_path}
-                                        alt="poster path"
-                                    />
+                                    <Link to={`/detail-film/${movie.id}`}>
+                                        <img
+                                            className="flex justify-center items-center content-center opacity-60 hover:opacity-100 "
+                                            src={import.meta.env.VITE_BASEIMGURL + movie.poster_path}
+                                            alt="poster path"
+                                        />
+                                    </Link>
                                 </div>
                             </div>
                         ))
                     ) : (
-                        trandingMovies.slice(0, 4).map((movie) => (
+                        popularMovies.slice(0, 4).map((movie) => (
                             <div key={movie.id}>
                                 <div className="border-2 border-red-800 hover:border-white p-2 m-4 flex justify-center cursor-pointer">
-                                    <img
-                                        className="flex justify-center items-center content-center opacity-60 hover:opacity-100 "
-                                        src={import.meta.env.VITE_BASEIMGURL + movie.poster_path}
-                                        alt="poster path"
-                                    />
+                                    <Link to={`/detail-film/${movie.id}`}>
+                                        <img
+                                            className="flex justify-center items-center content-center opacity-60 hover:opacity-100 "
+                                            src={import.meta.env.VITE_BASEIMGURL + movie.poster_path}
+                                            alt="poster path"
+                                        />
+                                    </Link>
                                 </div>
                             </div>
                         ))
                     )}
                 </div>
             </div>
+
+            {/* <DetailFilm data={`/detail-film/${trandingMovies.title}`} /> */}
         </>
     )
 }

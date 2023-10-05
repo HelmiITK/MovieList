@@ -17,7 +17,7 @@ function MainSection({ imageURL, title, overview, trailer }) {
                         {overview}
                     </p>
                     <Link to={`trailer/${trailer}`}>
-                        <button className="text-sm border-1 rounded-2xl px-2 py-0.5 border-2 lg:w-44 border-red-600 bg-red-600 lg:py-2 lg:mt-2 text-white lg:font-bold lg:text-lg lg:px-2 lg:rounded-3xl hover:bg-red-800 hover:border-red-800 ">
+                        <button className="cursor-pointer text-sm border-1 rounded-2xl px-2 py-0.5 border-2 lg:w-44 border-red-600 bg-red-600 lg:py-2 lg:mt-2 text-white lg:font-bold lg:text-lg lg:px-2 lg:rounded-3xl hover:bg-red-800 hover:border-red-800 ">
                             WATCH TRAILER
                         </button>
                     </Link>
