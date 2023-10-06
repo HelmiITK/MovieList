@@ -58,12 +58,12 @@ function PopularMovie() {
         <>
             <div className="w-full bg-black p-8">
                 <div className="flex justify-between mb-10">
-                    <header className="text-white lg:text-5xl font font-extrabold hover:text-red-600">Popular Movie</header>
+                    <header className="text-white text-lg lg:text-5xl font font-extrabold hover:text-red-600">Popular Movie</header>
                     <div className="group">
                         <button
                             onClick={handleClick}
                             type="button"
-                            className="flex items-center group-hover:text-white text-red-600 lg:text-xl gap-2 mr-5 ">
+                            className="flex items-center group-hover:text-white text-red-600 lg:text-xl gap-2 lg:mr-5 ">
                             {showAll ? 'See Some Movies' : 'See All Movies'}
                             <FiChevronsRight className="text-red-600 w-10 h-11 group-hover:text-white" />
                         </button>

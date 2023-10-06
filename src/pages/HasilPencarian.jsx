@@ -1,58 +1,69 @@
-// import { useEffect, useState } from "react";
-// import { useSearchParams } from "react-router-dom";
-// import axios from "axios";
-// import PopularMovie from "../components/PopularMovie";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom"
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 function HasilPencarian() {
-    // const [searchParams] = useSearchParams();
-    // const [searchMovie, setSearchMovie] = useState([]);
+    const [searchParams] = useSearchParams();
 
-    // const query = searchParams.get("query");
-    // const page = searchParams.get("page");
-    // const IMAGE_PATH = import.meta.env.VITE_TRANDING_IMG;
+    const [searchMovie, setSearchMovie] = useState([]);
 
-
-    // useEffect(() => {
-    //     const getSearchMovie = async () => {
-    //         try {
-    //             // Get the data from API with query and page variable
-    //             const response = await axios.get(
-    //                 `${import.meta.env.VITE_API_URL
-    //                 }/search/movie?query=${query}&page${page}`,
-    //                 {
-    //                     headers: {
-    //                         Authorization: `Bearer ${import.meta.env.VITE_API_AUTH_TOKEN}`,
-    //                     },
-    //                 }
-    //             );
-    //             // Set state for the movie that have been searched
-    //             const { data } = response;
-    //             setSearchMovie(data?.results);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-    //     getSearchMovie();
-    // }, [query, page]);
+    const query = searchParams.get("query");
+    const page = searchParams.get("page");
 
 
+    useEffect(() => {
+        const getSearchMovie = async () => {
+            try {
+                // Get the data from API with query and page variable
+                const response = await axios.get(
+                    `${import.meta.env.VITE_API_URL
+                    }/search/movie?query=${query}&page${page}`,
+                    // `${import.meta.env.VITE_API_URL}/search/movie?include_adult=false&language=en-US&page=${page}=${query}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${import.meta.env.VITE_API_AUTH_TOKEN}`,
+                        },
+                    }
+                );
+                // Set state for the movie that have been searched
+                const { data } = response;
+                setSearchMovie(data?.results);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        getSearchMovie();
+    }, [query, page]);
+
+
+    console.log(searchMovie)
     return (
         <>
-            {/* <div className="max-w-screen-2xl mx-auto mb-10">
-                <h1 className="font-semibold text-3xl pt-48 ml-6 md:text-4xl md:ml-10 md:pt-28 mb-5">
-                    {searchParams}
+            <Navbar />
+            <div className="w-full bg-black">
+                <h1 className=" text-white font-semibold text-3xl pt-48 ml-6 md:text-4xl md:ml-10 md:pt-28 mb-5">
+                    {`Search = ${query}`}
                 </h1>
-                <div className="flex justify-center items-center flex-wrap p-2 2xl:max-w-screen-2xl gap-5">
-                    {searchMovie.map((movie) => (
-                        <div key={movie}>
-                            <PopularMovie
-
-                            />
+                <div className="grid lg:grid-cols-4 md:grid-cols-2">
+                    {searchMovie.map((search) => (
+                        <div 
+                            key={search.id}
+                            className="border-2 border-red-800 hover:border-white p-2 m-4 flex justify-center cursor-pointer">
+                            <Link to={`/detail-film/${search.id}`}>
+                                <img 
+                                    src={import.meta.env.VITE_BASEIMGURL + search.poster_path} 
+                                    alt="Poster_movie" 
+                                    className="flex justify-center items-center content-center opacity-60 hover:opacity-100 "
+                                    />
+                            </Link>
                         </div>
                     ))}
-
                 </div>
-            </div> */}
+            </div>
+            <Footer />
         </>
     )
 }

@@ -7,9 +7,9 @@ function MainSection({ imageURL, title, overview, trailer }) {
             <div className="relative">
                 <img
                     src={imageURL}
-                    className="w-full lg:w-full md:w-full md:h-full lg:h-full xl:h-full"
+                    className="h-96 lg:w-full md:w-full md:h-full lg:h-full xl:h-full"
                 />
-                <div className="absolute bottom-4 sm:bottom-28 mx-8 left-2 md:top-36 md:mx-10 lg:mx-4 lg:top-52 lg:left-8 ">
+                <div className="absolute bottom-28 sm:bottom-28 mx-8 left-2 md:top-36 md:mx-10 lg:mx-4 lg:top-52 lg:left-8 ">
                     <h1 className="mb-1 border-b border-red-600 inline-block text-white font-bold text-2xl md:text-6xl lg:text-8xl lg:mb-4" >
                         {title}
                     </h1>

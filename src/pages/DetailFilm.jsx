@@ -8,7 +8,7 @@ import Footer from "../components/Footer";
 import { BsCalendarDateFill } from "react-icons/bs"
 import { MdOutlineSlowMotionVideo } from "react-icons/md"
 import { FiChevronsLeft } from "react-icons/fi"
-
+import { FaPlay } from "react-icons/fa6"
 function DetailFilm() {
     const { movieId } = useParams();
 
@@ -86,9 +86,12 @@ function DetailFilm() {
                             {detailMovies.vote_average}
                         </i>
                     </div>
-                    <div className="mt-3">
+                    <div className="hover:text-red-500 mt-3 cursor-pointer border-2 border-red-600 bg-red-600 p-2 w-48 rounded-3xl hover:bg-black text-lg font-bold">
                         <Link as={Link} to={`/trailer/${detailMovies.id}`}>
-                            <button className="cursor-pointer border-2 border-red-600 bg-red-600 p-2 w-36 rounded-3xl hover:bg-yellow-600 text-lg font-bold" type="button">Watch Trailer</button>
+                            <button type="button" className="flex gap-3 items-center ml-3 ">
+                                <FaPlay/>
+                                Watch Trailer
+                            </button>
                         </Link>
                     </div>
                 </div>

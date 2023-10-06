@@ -1,7 +1,23 @@
 import { SlMenu, SlMagnifier } from "react-icons/sl"
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
     
+    const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const searchQuery = e.target.search.value;
+
+        if (searchQuery.trim() === "") {
+            return;
+        }
+
+        const searchUrl = `/search?query=${searchQuery}&include_adult=false&page=1`;
+        // const searchUrl = `/hasil-pencarian/movie?include_adult=false&language=en-US&page=1&query=${searchQuery}`
+
+        navigate(searchUrl)
+    }
 
     return (
         <>
@@ -11,9 +27,13 @@ function Navbar() {
                         <h1>MovieList</h1>
                     </div>
                     <div className="md:flex md:justify-between md:mr-5">
-                        <div className="flex justify-between mx-2 mr-9 mt-1 lg:mt-0">
-                            <div className="flex">
+                        <div className=" flex justify-between mx-2 mr-9 mt-1 lg:mt-0">
+                            <form 
+                                action="search" 
+                                className="flex"
+                                onSubmit={handleSearch}>
                                 <input
+                                    name="search"
                                     type="text"
                                     className=" border-y-2 border-s-2 border-red-600 rounded-s-3xl bg-transparent px-3 lg:w-[550px] placeholder:text-gray-300 text-white"
                                     placeholder="Mau nonton apa hari ini?"
@@ -21,7 +41,7 @@ function Navbar() {
                                 <button type="submit">
                                     <SlMagnifier className="w-11 h-11 p-[7px] border-e-2 border-y-2 rounded-e-3xl text-gray-300 border-red-600 hover:bg-red-600 hover:text-white" />
                                 </button>
-                            </div>
+                            </form>
                             <button>
                                 <SlMenu className="w-10 h-8 ml-10 sm:ml-80 md:ml-[450px] lg:hidden text-red-600 " />
                             </button>

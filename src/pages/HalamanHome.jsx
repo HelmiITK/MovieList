@@ -66,7 +66,7 @@ function HalamanHome1() {
 
         appendDots: (dots) => (
             <div className="relative">
-                <ul className="flex items-center justify-center absolute bottom-10 border-2 border-red-600 bg-white bg-opacity-30 mx-20 rounded-full lg:bottom-52 lg:mx-[550px] right-0 left-0">
+                <ul className="flex items-center justify-center absolute bottom-10 border-2 border-red-600 bg-white bg-opacity-30 mx-full rounded-full lg:bottom-52 lg:mx-[550px] right-0 left-0">
                     {dots}
                 </ul>
             </div>

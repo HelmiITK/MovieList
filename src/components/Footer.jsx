@@ -5,9 +5,9 @@ function Footer() {
     return (
         <>
             <div className="w-full bg-black border-t-2 border-t-red-600 pt-10 px-8 pb-8">
-                <div className="flex justify-around">
-                    <div className="border-r-2 border-r-red-600 flex items-center  p-10" >
-                        <header className="text-white font-extrabold lg:text-5xl ">MovieList</header>
+                <div className="lg:flex lg:justify-around md:flex ">
+                    <div className="md:border-r-2 md:border-r-red-600 flex items-center  p-10" >
+                        <header className="text-white font-extrabold text-2xl  lg:text-5xl ">MovieList</header>
                     </div>
                     <div className="text-lg">
                         <p className="text-white font-bold text-xl mb-2">From Me</p>
