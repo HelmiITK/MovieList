@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MainSection from "../components/MainSection";
 import Navbar from "../components/Navbar";
 import PopularMovie from "../components/PopularMovie"
 import Footer from "../components/Footer"
-
 import axios from "axios";
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css";
@@ -11,8 +10,9 @@ import Slider from "react-slick";
 
 function HalamanHome1() {
     const [trandingMovies, setTrandingMovies] = useState([]);
-    // console.log(trandingMovies)
+    const linkRef = useRef(null)
 
+    //get API tranding movies
     useEffect(() => {
         const getTrandingMovies = async () => {
             try {
@@ -25,15 +25,12 @@ function HalamanHome1() {
                     }
                 );
 
-
                 const { data } = respons;
-                // console.log(data.results[0]);
                 const trending = []
                 for (let i = 0; i <= data.results.length; i++) {
-                    if (i <= 9) {
+                    if (i <= 2) {
                         trending.push(data.results[i])
                     }
-
                 }
                 setTrandingMovies(trending);
 
@@ -53,7 +50,16 @@ function HalamanHome1() {
         return <h1>Loading...</h1>;
     }
 
+    // back to MainSection when on click text MovieList in Footer from homepage
+    const goto = (ref) => {
+        window.scrollTo({
+            top: ref.offsetTop,
+            left: 0,
+            behavior: 'smooth'
+        })
+    }
 
+    //Carousel by react-slick
     var settings = {
         dots: true,
         infinite: true,
@@ -66,24 +72,21 @@ function HalamanHome1() {
 
         appendDots: (dots) => (
             <div className="relative">
-                <ul className="flex items-center justify-center absolute bottom-10 border-2 border-red-600 bg-white bg-opacity-30 mx-full rounded-full lg:bottom-52 lg:mx-[550px] right-0 left-0">
+                <ul className="flex items-center justify-center absolute bottom-10 lg:bottom-52 lg:mx-[550px] right-0 left-0">
                     {dots}
                 </ul>
             </div>
         )
     };
 
-
     return (
         <div>
             <Navbar />
-
-            <div className="w-full bg-black pb-5">
+            <div className="w-full bg-black">
                 <Slider {...settings}>
                     {trandingMovies.map((movie) => (
-                        <div key={movie.id}>
+                        <div key={movie.id} ref={linkRef}>
                             <MainSection
-                                // trailer={`${import.meta.env.VITE_TRAILER}/${movie.id}/videos?language=en-US`}
                                 trailer={movie.id}
                                 imageURL={import.meta.env.VITE_TRANDING_IMG + movie.backdrop_path}
                                 title={movie.title}
@@ -93,11 +96,8 @@ function HalamanHome1() {
                     ))}
                 </Slider>
             </div>
-
             <PopularMovie />
-            
-            <Footer />
-
+            <Footer linkRef={linkRef} goto={goto} />
         </div >
     )
 }

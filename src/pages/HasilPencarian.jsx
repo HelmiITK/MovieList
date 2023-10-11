@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import axios from "axios";
-import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 function HasilPencarian() {
     const [searchParams] = useSearchParams();
-
     const [searchMovie, setSearchMovie] = useState([]);
 
     const query = searchParams.get("query");
     const page = searchParams.get("page");
-
 
     useEffect(() => {
         const getSearchMovie = async () => {
@@ -21,7 +18,6 @@ function HasilPencarian() {
                 const response = await axios.get(
                     `${import.meta.env.VITE_API_URL
                     }/search/movie?query=${query}&page${page}`,
-                    // `${import.meta.env.VITE_API_URL}/search/movie?include_adult=false&language=en-US&page=${page}=${query}`,
                     {
                         headers: {
                             Authorization: `Bearer ${import.meta.env.VITE_API_AUTH_TOKEN}`,
@@ -38,13 +34,13 @@ function HasilPencarian() {
         getSearchMovie();
     }, [query, page]);
 
-
     console.log(searchMovie)
+    
     return (
         <>
             <Navbar />
             <div className="w-full bg-black">
-                <h1 className=" text-white font-semibold text-3xl pt-48 ml-6 md:text-4xl md:ml-10 md:pt-28 mb-5">
+                <h1 className="text-white font-semibold text-3xl pt-28 ml-6 md:text-4xl md:ml-10 md:pt-28 mb-5">
                     {`Search = ${query}`}
                 </h1>
                 <div className="grid lg:grid-cols-4 md:grid-cols-2">
